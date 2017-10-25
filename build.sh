@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -xe
 #
 # Build a docker image with latest commit id as tag
 # NOTE: you will need to login to registry first
@@ -9,7 +9,7 @@ IMAGE=test
 
 # NO CONFIGURABLE OPTIONS BELOW THIS LINE
 
-URL=$REGISTRY/$REPO/$IMAGE:$COMMIT_ID
 LAST_COMMIT=$(git rev-parse --short HEAD)
+URL=$REGISTRY/$REPO/$IMAGE:$LAST_COMMIT
 docker build -t $URL .
-docker push $URL:$COMMIT_ID
+docker push $URL
